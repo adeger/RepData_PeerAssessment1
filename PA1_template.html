@@ -86,7 +86,7 @@ cat(&quot;median: &quot;, step_day_median, &quot; , mean: &quot;, step_day_mean,
 <pre><code>## median: 10765 , mean: 10766.19</code></pre>
 <p>Plot histogram.</p>
 <pre class="r"><code>hist(steps_daysum$sumday, breaks=10)</code></pre>
-<p><img src="PA1_template_files/figure-html/unnamed-chunk-4-1.png" title="" alt="" width="672" /></p>
+<p><img src="PA1_template_files/figure-html/unnamed-chunk-4-1.png" /></p>
 <p>Create dataframe with interval indexed by it’s order in the day (61 days total, 288 5 minute intervals per 24 hour period, code assumes data set has full 288 sequences per day)</p>
 <pre class="r"><code>days = nrow(activity)
 activity_indexed &lt;- transform(activity, seq_no=rep(1:288, days)) %&gt;% group_by(seq_no) %&gt;% summarise(seq_mean=mean(steps, na.rm=TRUE))</code></pre>
@@ -100,7 +100,7 @@ plot(activity_indexed$seq_no, activity_indexed$seq_mean,
      type=&quot;o&quot;,
      xlab=&quot;Minute of Day / 5&quot;, ylab=&quot;Mean Steps in Interval&quot;,
      main=&quot;Mean Steps by Interval Number&quot;)</code></pre>
-<p><img src="PA1_template_files/figure-html/unnamed-chunk-6-1.png" title="" alt="" width="672" /></p>
+<p><img src="PA1_template_files/figure-html/unnamed-chunk-6-1.png" /></p>
 <p>Investigate and impute missing data by replacing NA values with mean for that interval from other intervals contained in active_indexed df</p>
 <pre class="r"><code>cat(&quot;Number of missing values:&quot;, sum(is.na(activity$steps)))</code></pre>
 <pre><code>## Number of missing values: 2304</code></pre>
@@ -130,7 +130,7 @@ cat(&quot;median (imputed): &quot;, step_imputed_day_median, &quot; , mean (impu
 <pre class="r"><code>cat(&quot;Change in mean from data with NA&#39;s to data with imputed values: &quot;, step_imputed_day_mean - step_day_mean, &quot;steps&quot;)</code></pre>
 <pre><code>## Change in mean from data with NA&#39;s to data with imputed values:  -0.549335 steps</code></pre>
 <pre class="r"><code>hist(steps_imputed_daysum$sumday, breaks=10)</code></pre>
-<p><img src="PA1_template_files/figure-html/unnamed-chunk-7-1.png" title="" alt="" width="672" /></p>
+<p><img src="PA1_template_files/figure-html/unnamed-chunk-7-1.png" /></p>
 <p>Find if step interval averages are greater for weekdays than weekends</p>
 <pre class="r"><code>activity_xformed &lt;- transform(activity_xformed, seq_no=rep(1:288, 61))
 activity_xformed &lt;- transform(activity_xformed, day_of_week=weekdays(as.Date(activity_xformed[, 2], &quot;%Y-%m-%d&quot;), TRUE))
@@ -144,7 +144,7 @@ xyplot(mean_by_day_type ~ seq_no | weekend, data=sum_xformed_grouped,
        layout=c(1,2,1), type=&quot;l&quot;, 
       xlab=&quot;Minute of day / 5&quot;, ylab=&quot;Mean Steps of 5 Minute Interval&quot;,
       main=&quot;Comparison of Average Steps by 5 Minute Interval\nBetween Weekends and Weekdays&quot;)</code></pre>
-<p><img src="PA1_template_files/figure-html/unnamed-chunk-8-1.png" title="" alt="" width="672" /></p>
+<p><img src="PA1_template_files/figure-html/unnamed-chunk-8-1.png" /></p>
 <p>The weekend step activity appears to be greater than the weekday activity starting around 10 am although weekday activity seems greater in the earliest part of the waking day.</p>
 
 
