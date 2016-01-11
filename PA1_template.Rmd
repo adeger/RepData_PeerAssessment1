@@ -1,6 +1,8 @@
 ---  
 title: Reproducible Research - Project 1
-output: html_document
+output: 
+  html_document: 
+    self_contained: no
 ---
 
 Data were obtained from https://d396qusza40orc.cloudfront.net/repdata/data/activity.zip on 10/01/2016, but assume data are in current working directory.
